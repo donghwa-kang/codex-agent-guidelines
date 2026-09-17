@@ -1,0 +1,25 @@
+{
+  "name": "codex-agent-guidelines",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Install focused, verifiable Codex guidelines without overwriting existing instructions.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/donghwa-kang/codex-agent-guidelines.git"
+  },
+  "bin": {
+    "codex-agent-guidelines": "bin/install.cjs"
+  },
+  "files": [
+    "bin/install.cjs",
+    "AGENTS.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test tests/install.test.cjs"
+  }
+}

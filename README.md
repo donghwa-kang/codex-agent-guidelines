@@ -8,7 +8,25 @@ Codex가 요구사항을 확인하고, 필요한 부분을 수정하고, 결과�
 
 ## 한 줄 설치
 
-**적용할 프로젝트 폴더에서** 운영체제에 맞는 명령 하나를 실행하세요. 현재 폴더에 `AGENTS.md`를 설치합니다. 기존 `AGENTS.md` 또는 `AGENTS.override.md`가 있으면 변경하지 않고 중단합니다.
+**적용할 프로젝트 폴더에서** 아래 방법 중 하나만 실행하세요. 현재 폴더에 `AGENTS.md`를 설치합니다. 기존 `AGENTS.md` 또는 `AGENTS.override.md`가 있으면 변경하지 않고 중단합니다.
+
+### npx — 운영체제 공통
+
+Node.js 18 이상, npm에 포함된 `npx`, Git이 필요합니다.
+
+```sh
+npx --yes github:donghwa-kang/codex-agent-guidelines
+```
+
+npm을 직접 사용하려면 같은 작업을 다음 명령으로 실행할 수 있습니다.
+
+```sh
+npm exec --yes -- github:donghwa-kang/codex-agent-guidelines
+```
+
+GitHub 저장소의 패키지를 받아 실행하며 npm 레지스트리에는 게시하지 않았습니다. 프로젝트 의존성에 추가하지 않고 패키지에 포함된 지침 파일을 설치합니다. 실행 코드는 [Node.js 설치기](bin/install.cjs)에서 확인할 수 있습니다.
+
+### Node.js 없이 설치하기
 
 **Windows / PowerShell**
 
@@ -24,7 +42,7 @@ bash -o pipefail -c 'curl -fsSL https://raw.githubusercontent.com/donghwa-kang/c
 
 `Installed AGENTS.md.`로 시작하는 메시지가 나오면 파일 설치가 완료된 것입니다. 해당 프로젝트에서 **Codex의 새 작업 또는 새 CLI 세션**을 시작하세요. 기존 지침이 있어 중단됐다면 아래의 **기존 지침과 병합하기** 절차를 따르세요.
 
-이 명령은 저장소의 설치 스크립트를 다운로드해 실행합니다. 실행 내용을 먼저 확인하려면 [PowerShell 스크립트](install.ps1) 또는 [셸 스크립트](install.sh)를 읽으세요. 파일을 직접 받으려면 아래의 **수동 설치와 적용 확인**을 이용하세요.
+위 PowerShell·curl 명령은 저장소의 설치 스크립트를 다운로드해 실행합니다. 실행 내용을 먼저 확인하려면 [PowerShell 스크립트](install.ps1) 또는 [셸 스크립트](install.sh)를 읽으세요. 파일을 직접 받으려면 아래의 **수동 설치와 적용 확인**을 이용하세요.
 
 ## andrej-karpathy-skills와의 관계
 
@@ -156,10 +174,13 @@ bash -o pipefail -c 'curl -fsSL https://raw.githubusercontent.com/donghwa-kang/c
 
 새 규칙을 제안할 때는 해결하려는 실패 상황과 기존 규칙으로 충분하지 않은 이유를 함께 적어 주세요. 문서 수정 시 코드 블록, 내부 링크, 설치 명령과 실제 동작의 일치를 확인해 주세요.
 
+Node.js 설치기를 수정할 때는 저장소 루트에서 `npm test`를 실행하세요. 추가 의존성 설치 없이 정상 설치·재실행·기존 지침 보존·동명 폴더 보호·도움말·잘못된 인수를 검증합니다.
+
 ## 출처
 
 - [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills): 네 가지 행동 원칙의 출발점입니다. 구체적인 규칙은 원본의 [Karpathy Guidelines 스킬 문서](https://raw.githubusercontent.com/multica-ai/andrej-karpathy-skills/main/skills/karpathy-guidelines/SKILL.md)에서 확인할 수 있습니다.
 - [OpenAI Codex 활용 지침](https://learn.chatgpt.com/guides/best-practices)과 [AGENTS.md 공식 안내](https://learn.chatgpt.com/docs/agent-configuration/agents-md)를 참고했습니다.
+- GitHub에서 패키지를 실행하는 방식은 npm의 [패키지 지정법](https://docs.npmjs.com/cli/v11/using-npm/package-spec/)과 [npm exec 안내](https://docs.npmjs.com/cli/v11/commands/npm-exec/)를 참고했습니다.
 
 이 저장소는 독립적으로 작성·관리하는 지침 모음입니다. 원본 프로젝트의 공식 배포판이 아니며, Andrej Karpathy 또는 OpenAI의 제작·승인을 뜻하지 않습니다.
 
