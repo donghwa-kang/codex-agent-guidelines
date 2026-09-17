@@ -6,6 +6,26 @@ Codex가 요구사항을 확인하고, 필요한 부분을 수정하고, 결과�
 
 프로젝트에 파일을 추가하면 사용할 수 있습니다. 별도의 앱, 모델, 백그라운드 에이전트를 설치하는 프로젝트가 아닙니다. 이미 사용하는 Codex의 작업 방식을 조정하는 텍스트 지침입니다.
 
+## 한 줄 설치
+
+**적용할 프로젝트 폴더에서** 운영체제에 맞는 명령 하나를 실행하세요. 현재 폴더에 `AGENTS.md`를 설치합니다. 기존 `AGENTS.md` 또는 `AGENTS.override.md`가 있으면 변경하지 않고 중단합니다.
+
+**Windows / PowerShell**
+
+```powershell
+irm https://raw.githubusercontent.com/donghwa-kang/codex-agent-guidelines/main/install.ps1 -ErrorAction Stop | iex
+```
+
+**macOS / Linux / Git Bash** — Bash, `curl`, `mktemp`, `ln`이 필요합니다.
+
+```bash
+bash -o pipefail -c 'curl -fsSL https://raw.githubusercontent.com/donghwa-kang/codex-agent-guidelines/main/install.sh | bash'
+```
+
+`Installed AGENTS.md.`로 시작하는 메시지가 나오면 파일 설치가 완료된 것입니다. 해당 프로젝트에서 **Codex의 새 작업 또는 새 CLI 세션**을 시작하세요. 기존 지침이 있어 중단됐다면 아래의 **기존 지침과 병합하기** 절차를 따르세요.
+
+이 명령은 저장소의 설치 스크립트를 다운로드해 실행합니다. 실행 내용을 먼저 확인하려면 [PowerShell 스크립트](install.ps1) 또는 [셸 스크립트](install.sh)를 읽으세요. 파일을 직접 받으려면 아래의 **수동 설치와 적용 확인**을 이용하세요.
+
 ## andrej-karpathy-skills와의 관계
 
 이 프로젝트의 출발점은 [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills)입니다. 원본은 Andrej Karpathy가 지적한 LLM 코딩의 문제를 바탕으로, 잘못된 가정·과도한 추상화·요청과 무관한 수정 등을 줄이기 위한 행동 원칙을 정리한 커뮤니티 프로젝트입니다. Claude Code용 `CLAUDE.md`와 스킬·플러그인 설치 방식, Cursor용 규칙을 제공합니다.
@@ -56,7 +76,7 @@ Codex가 요구사항을 확인하고, 필요한 부분을 수정하고, 결과�
 6. 도구를 목적에 맞게 사용하기
 7. 끝까지 수행하고 정확하게 인계하기
 
-## 가장 쉬운 적용 방법
+## 수동 설치와 적용 확인
 
 필요한 것은 `AGENTS.md`를 읽을 수 있는 Codex 환경과 작업할 프로젝트입니다. 이 파일 자체에는 패키지 설치, 빌드, 별도 API 키가 필요하지 않습니다. Codex의 계정·인증·권한 설정은 기존 환경을 사용합니다.
 
@@ -66,49 +86,6 @@ Codex가 요구사항을 확인하고, 필요한 부분을 수정하고, 결과�
 4. 대상 프로젝트에서 Codex의 새 작업 또는 새 CLI 세션을 시작하고 적용 상태를 확인합니다.
 
 같은 디렉터리에 `AGENTS.override.md`가 있으면 그 파일이 우선됩니다. 다른 위치의 전역·프로젝트 지침도 함께 적용될 수 있습니다. 로딩 규칙은 [OpenAI 공식 문서](https://learn.chatgpt.com/docs/agent-configuration/agents-md)를 참고하세요.
-
-### 터미널로 다운로드하기
-
-아래 명령은 **대상 프로젝트 루트에서** 실행합니다. 기존 `AGENTS.md` 또는 `AGENTS.override.md`가 있으면 중단합니다. 다운로드한 내용을 임시 파일에 받은 뒤 새 `AGENTS.md`로 배치하며, 기존 파일을 덮어쓰지 않습니다.
-
-**Windows / PowerShell**
-
-```powershell
-& {
-    $ErrorActionPreference = 'Stop'
-    $targetPath = Join-Path (Get-Location) 'AGENTS.md'
-    if ((Test-Path -LiteralPath $targetPath) -or (Test-Path -LiteralPath 'AGENTS.override.md')) {
-        throw '기존 지침이 있습니다. README의 병합 절차를 먼저 확인하세요.'
-    }
-    $downloadPath = [System.IO.Path]::GetTempFileName()
-    try {
-        Invoke-WebRequest -UseBasicParsing -Uri 'https://raw.githubusercontent.com/donghwa-kang/codex-agent-guidelines/main/AGENTS.md' -OutFile $downloadPath -ErrorAction Stop
-        [System.IO.File]::Move($downloadPath, $targetPath)
-    } finally {
-        if (Test-Path -LiteralPath $downloadPath) {
-            Remove-Item -LiteralPath $downloadPath
-        }
-    }
-}
-```
-
-**macOS / Linux / Git Bash** — `curl`, `mktemp`, `ln`이 필요합니다.
-
-```sh
-(
-    set -eu
-    if [ -e AGENTS.md ] || [ -L AGENTS.md ] || [ -e AGENTS.override.md ] || [ -L AGENTS.override.md ]; then
-        printf '%s\n' 'Existing instructions found. Follow the merge instructions in README.' >&2
-        exit 1
-    fi
-    download_file=$(mktemp './.codex-guidelines.XXXXXX')
-    trap 'rm -f "$download_file"' 0
-    curl -fsSL 'https://raw.githubusercontent.com/donghwa-kang/codex-agent-guidelines/main/AGENTS.md' -o "$download_file"
-    ln "$download_file" AGENTS.md
-)
-```
-
-명령 완료 후 현재 디렉터리에 `AGENTS.md`가 생기고, 파일을 열었을 때 일곱 개의 원칙이 보이면 다운로드와 배치가 끝난 것입니다. 이는 파일 설치 확인이며, Codex에서 실제로 읽었는지는 다음 절차로 확인합니다.
 
 ### 적용 확인하기
 
@@ -169,7 +146,7 @@ Codex가 요구사항을 확인하고, 필요한 부분을 수정하고, 결과�
 - 외부 지시문에 대한 규칙은 방어 원칙입니다. 프롬프트 인젝션을 기술적으로 차단하는 보안 제품은 아닙니다.
 - 모델, 작업 맥락, 도구, 지침 충돌에 따라 결과가 달라질 수 있습니다. 효과를 확인하려면 자신의 대표 작업으로 비교해야 합니다.
 - 지침 본문은 정적 검토와 가상 실패 시나리오 검토를 거쳤습니다. 실제 모델을 반복 실행한 비교 평가나 공격 성공률 측정은 수행하지 않았습니다.
-- 2026-09-17 기준 Windows의 PowerShell 7.6.5, Windows PowerShell 5.1, Git Bash 5.2.26에서 README의 다운로드 명령을 실행했습니다. 정상 설치 결과를 원본 파일과 SHA-256으로 대조했고, 기존 `AGENTS.md`·`AGENTS.override.md` 보존과 다운로드 실패 시 미설치 상태를 확인했습니다.
+- 2026-09-17 기준 Windows의 PowerShell 7.6.5, Windows PowerShell 5.1, Git Bash 5.2.26에서 설치 스크립트를 검증했습니다. 공백·한글이 포함된 경로에서 설치 결과를 원본의 SHA-256과 대조했고, 재실행·기존 `AGENTS.md`·`AGENTS.override.md`·동명 폴더 보존과 다운로드 오류·빈 응답 처리 및 임시 파일 정리를 확인했습니다.
 - macOS·Linux 네이티브 환경에서는 명령을 직접 실행하지 않았습니다. 셸 명령에 필요한 도구와 하드 링크를 지원하지 않는 파일 시스템에서는 수동 다운로드 방법을 사용하세요.
 - 현재 검증 환경의 CLI 실행 제약으로 Codex 세션 내 지침 로딩은 직접 확인하지 못했습니다. 설치 후 위의 적용 확인 절차를 수행해 주세요.
 
