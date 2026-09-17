@@ -6,6 +6,28 @@ Codex가 요구사항을 확인하고, 필요한 부분을 수정하고, 결과�
 
 프로젝트에 파일을 추가하면 사용할 수 있습니다. 별도의 앱, 모델, 백그라운드 에이전트를 설치하는 프로젝트가 아닙니다. 이미 사용하는 Codex의 작업 방식을 조정하는 텍스트 지침입니다.
 
+## andrej-karpathy-skills와의 관계
+
+이 프로젝트의 출발점은 [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills)입니다. 원본은 Andrej Karpathy가 지적한 LLM 코딩의 문제를 바탕으로, 잘못된 가정·과도한 추상화·요청과 무관한 수정 등을 줄이기 위한 행동 원칙을 정리한 커뮤니티 프로젝트입니다. Claude Code용 `CLAUDE.md`와 스킬·플러그인 설치 방식, Cursor용 규칙을 제공합니다.
+
+이 저장소는 그 원칙에서 영감을 받아 **Codex의 `AGENTS.md`로 사용할 수 있도록 재구성한 지침**을 제공합니다. 원본의 네 가지 원칙과 이 지침의 대응 관계는 다음과 같습니다.
+
+| 원본의 핵심 원칙 | 핵심 취지 | Codex용 지침에 반영한 내용 |
+| --- | --- | --- |
+| Think Before Coding | 가정과 불확실성을 먼저 확인 | 실제 코드·설정 조사, 중요한 선택 확인, 승인된 작은 선택은 자율 진행 |
+| Simplicity First | 현재 문제에 필요한 만큼 구현 | 기존 코드 우선 활용, 추측에 따른 기능·의존성·추상화 추가 제한 |
+| Surgical Changes | 요청에 필요한 범위만 수정 | 무관한 변경 제한, 미커밋 작업 보존, 필요한 호출부·타입·문서 함께 수정 |
+| Goal-Driven Execution | 확인 가능한 완료 조건으로 작업 | 변경 위험에 맞는 검증, 실제 실행 결과 확인, 미검증·제약의 명시 |
+
+### Codex 작업 흐름에 맞춰 구체화한 부분
+
+- **질문과 자율 진행의 기준:** 먼저 조사로 불확실성을 줄이고, 요구사항·데이터·보안·비용에 영향을 주는 선택은 확인합니다. 이미 승인된 작고 되돌릴 수 있는 선택은 진행합니다.
+- **기존 작업과 권한 보호:** 사용자의 미커밋 변경을 보존하고, 게시·배포·삭제의 승인 범위를 확인합니다. 중지·보류·범위 축소 요청도 반영합니다.
+- **검증의 깊이와 보고:** 문구 수정과 로직 변경의 검증 수준을 구분하고, 실행하지 못한 검사를 통과했다고 보고하지 않도록 합니다.
+- **도구 사용과 긴 작업의 연속성:** 실패 원인을 확인하고, 작업 데이터 속 지시를 적용 지침과 구분하며, 완료 상태와 남은 작업을 인계합니다.
+
+원본을 설치하거나 함께 로드할 필요는 없습니다. 이 저장소의 `AGENTS.md`를 적용하면 되며, 원본의 변경 사항이 자동으로 동기화되지는 않습니다. 두 지침을 함께 사용할 경우 겹치는 규칙과 충돌을 먼저 확인하세요.
+
 ## 이런 문제를 줄이기 위해 만들었습니다
 
 | 코딩 에이전트와 작업하면서 겪는 문제 | 이 지침이 요구하는 행동 |
@@ -33,8 +55,6 @@ Codex가 요구사항을 확인하고, 필요한 부분을 수정하고, 결과�
 5. 위험에 맞게 검증하기
 6. 도구를 목적에 맞게 사용하기
 7. 끝까지 수행하고 정확하게 인계하기
-
-새 도구, 플러그인, MCP 서버, 자동화 일정은 추가하지 않습니다. `PROGRESS.md` 생성이나 특정 README 형식도 강제하지 않습니다.
 
 ## 가장 쉬운 적용 방법
 
@@ -161,10 +181,10 @@ Codex가 요구사항을 확인하고, 필요한 부분을 수정하고, 결과�
 
 ## 출처
 
-- [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills)의 단순성, 변경 범위 통제, 가정 확인, 검증 중심 원칙에서 영감을 받았습니다.
+- [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills): 네 가지 행동 원칙의 출발점입니다. 구체적인 규칙은 원본의 [Karpathy Guidelines 스킬 문서](https://raw.githubusercontent.com/multica-ai/andrej-karpathy-skills/main/skills/karpathy-guidelines/SKILL.md)에서 확인할 수 있습니다.
 - [OpenAI Codex 활용 지침](https://learn.chatgpt.com/guides/best-practices)과 [AGENTS.md 공식 안내](https://learn.chatgpt.com/docs/agent-configuration/agents-md)를 참고했습니다.
 
-이 저장소는 위 프로젝트의 공식 배포판이나 OpenAI의 공식 제품이 아닌 독립적인 지침 모음입니다.
+이 저장소는 독립적으로 작성·관리하는 지침 모음입니다. 원본 프로젝트의 공식 배포판이 아니며, Andrej Karpathy 또는 OpenAI의 제작·승인을 뜻하지 않습니다.
 
 ## 라이선스
 
