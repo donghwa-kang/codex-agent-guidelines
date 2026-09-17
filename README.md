@@ -2,13 +2,13 @@
 
 Codex가 요구사항을 확인하고, 필요한 부분을 수정하고, 결과를 검증하도록 돕는 공통 `AGENTS.md` 지침입니다.
 
-**[지침 읽기](AGENTS.md) · [AGENTS.md 다운로드](https://raw.githubusercontent.com/donghwa-kang/codex-agent-guidelines/main/AGENTS.md)**
+**[지침 읽기](AGENTS.md) · [수동 설치](#수동-설치와-적용-확인)**
 
 프로젝트에 파일을 추가하면 사용할 수 있습니다. 별도의 앱, 모델, 백그라운드 에이전트를 설치하는 프로젝트가 아닙니다. 이미 사용하는 Codex의 작업 방식을 조정하는 텍스트 지침입니다.
 
 ## 한 줄 설치
 
-**적용할 프로젝트 폴더에서** 아래 방법 중 하나만 실행하세요. 현재 폴더에 `AGENTS.md`를 설치합니다. 기존 `AGENTS.md` 또는 `AGENTS.override.md`가 있으면 변경하지 않고 중단합니다.
+**적용할 프로젝트 폴더에서** 아래 방법 중 하나만 실행하세요. 현재 폴더에 작업 지침 `AGENTS.md`와 출처·라이선스 고지 `THIRD_PARTY_NOTICES.md`를 설치합니다. 기존 `AGENTS.md`, `AGENTS.override.md`, `THIRD_PARTY_NOTICES.md` 중 하나라도 있으면 변경하지 않고 중단합니다.
 
 ### npm / npx — 운영체제 공통
 
@@ -100,9 +100,9 @@ bash -o pipefail -c 'curl -fsSL https://raw.githubusercontent.com/donghwa-kang/c
 
 필요한 것은 `AGENTS.md`를 읽을 수 있는 Codex 환경과 작업할 프로젝트입니다. 이 파일 자체에는 패키지 설치, 빌드, 별도 API 키가 필요하지 않습니다. Codex의 계정·인증·권한 설정은 기존 환경을 사용합니다.
 
-1. [AGENTS.md 원문](https://raw.githubusercontent.com/donghwa-kang/codex-agent-guidelines/main/AGENTS.md)을 다운로드합니다.
-2. 작업할 **프로젝트 루트**에 정확히 `AGENTS.md`라는 이름으로 저장합니다. `AGENTS.md.txt`가 되지 않았는지 확인합니다.
-3. 기존 `AGENTS.md`가 있다면 덮어쓰지 말고, 아래의 **기존 지침과 병합하기** 절차를 따릅니다.
+1. [AGENTS.md 원문](https://raw.githubusercontent.com/donghwa-kang/codex-agent-guidelines/main/AGENTS.md)과 [THIRD_PARTY_NOTICES.md 원문](https://raw.githubusercontent.com/donghwa-kang/codex-agent-guidelines/main/THIRD_PARTY_NOTICES.md)을 함께 다운로드합니다.
+2. 작업할 **프로젝트 루트**에 원래 파일명으로 저장합니다. `AGENTS.md.txt`처럼 확장자가 추가되지 않았는지 확인합니다.
+3. 기존 지침이나 고지 파일이 있다면 덮어쓰지 말고, 아래의 **기존 지침과 병합하기** 절차를 따릅니다.
 4. 대상 프로젝트에서 Codex의 새 작업 또는 새 CLI 세션을 시작하고 적용 상태를 확인합니다.
 
 같은 디렉터리에 `AGENTS.override.md`가 있으면 그 파일이 우선됩니다. 다른 위치의 전역·프로젝트 지침도 함께 적용될 수 있습니다. 로딩 규칙은 [OpenAI 공식 문서](https://learn.chatgpt.com/docs/agent-configuration/agents-md)를 참고하세요.
@@ -127,7 +127,8 @@ bash -o pipefail -c 'curl -fsSL https://raw.githubusercontent.com/donghwa-kang/c
 2. 이 저장소의 `AGENTS.md`를 열고 기존 내용과 비교합니다.
 3. 프로젝트 고유의 실행 명령, 기술 스택, 데이터 제약은 유지합니다.
 4. 겹치는 규칙은 하나로 통합하고, 충돌하는 규칙은 원하는 작업 방식에 맞게 정리합니다.
-5. Codex의 새 작업 또는 새 CLI 세션에서 다시 확인합니다.
+5. `THIRD_PARTY_NOTICES.md`도 함께 보관합니다. 기존 고지 파일이 있으면 이 프로젝트의 고지를 구분해 병합하고 기존 내용을 보존합니다.
+6. Codex의 새 작업 또는 새 CLI 세션에서 다시 확인합니다.
 
 전체 내용을 반복해서 덧붙이는 자동 설치 방식은 제공하지 않습니다. 서로 충돌하는 지침이나 중복된 규칙이 누적되는 것을 피하기 위해서입니다.
 
@@ -159,6 +160,8 @@ bash -o pipefail -c 'curl -fsSL https://raw.githubusercontent.com/donghwa-kang/c
 - **제거:** 별도로 추가한 파일이라면 그 파일만 제거하고, 기존 파일에 병합했다면 추가한 규칙만 제거하거나 백업을 참고해 복원합니다. 이후에 생긴 사용자 변경은 보존하세요.
 - **적용 시점:** 변경 후 대상 프로젝트에서 새 작업 또는 새 CLI 세션을 시작합니다.
 
+설치 중 파일 충돌이나 쓰기 오류가 발생하면 먼저 설치한 고지 파일만 남을 수 있습니다. 기존 파일을 보존하기 위해 자동으로 삭제하지 않습니다. 오류 메시지와 두 파일의 내용을 확인한 뒤 수동 설치·병합 절차로 마무리하세요. 다운로드 오류나 빈 응답은 두 파일을 설치하기 전에 감지합니다.
+
 ## 한계와 검증 상태
 
 - 행동을 유도하는 텍스트 지침이며 모델의 판단 오류를 없애거나 규칙 준수를 보장하지 않습니다.
@@ -167,7 +170,7 @@ bash -o pipefail -c 'curl -fsSL https://raw.githubusercontent.com/donghwa-kang/c
 - 모델, 작업 맥락, 도구, 지침 충돌에 따라 결과가 달라질 수 있습니다. 효과를 확인하려면 자신의 대표 작업으로 비교해야 합니다.
 - 지침 본문은 정적 검토와 가상 실패 시나리오 검토를 거쳤습니다. 실제 모델을 반복 실행한 비교 평가나 공격 성공률 측정은 수행하지 않았습니다.
 - 2026-09-17 기준 Windows의 PowerShell 7.6.5, Windows PowerShell 5.1, Git Bash 5.2.26에서 설치 스크립트를 검증했습니다. 공백·한글이 포함된 경로에서 설치 결과를 원본의 SHA-256과 대조했고, 재실행·기존 `AGENTS.md`·`AGENTS.override.md`·동명 폴더 보존과 다운로드 오류·빈 응답 처리 및 임시 파일 정리를 확인했습니다.
-- npm/npx 방식은 Windows의 Node.js 24.20.0·npm 11.19.0 및 npm 동봉 npx로 새 캐시에서 실제 GitHub 설치와 재실행 시 파일 보존을 확인했습니다. Node.js 설치기의 자동 테스트 6개도 통과했습니다. 다른 Node.js/npm 버전 조합은 직접 실행하지 않았습니다.
+- npm/npx 방식은 Windows의 Node.js 24.20.0·npm 11.19.0 및 npm 동봉 npx로 새 캐시에서 실제 GitHub 설치와 재실행 시 파일 보존을 확인했습니다. 다른 Node.js/npm 버전 조합은 직접 실행하지 않았습니다.
 - macOS·Linux 네이티브 환경에서는 명령을 직접 실행하지 않았습니다. 셸 명령에 필요한 도구와 하드 링크를 지원하지 않는 파일 시스템에서는 수동 다운로드 방법을 사용하세요.
 - 현재 검증 환경의 CLI 실행 제약으로 Codex 세션 내 지침 로딩은 직접 확인하지 못했습니다. 설치 후 위의 적용 확인 절차를 수행해 주세요.
 
@@ -177,7 +180,7 @@ bash -o pipefail -c 'curl -fsSL https://raw.githubusercontent.com/donghwa-kang/c
 
 새 규칙을 제안할 때는 해결하려는 실패 상황과 기존 규칙으로 충분하지 않은 이유를 함께 적어 주세요. 문서 수정 시 코드 블록, 내부 링크, 설치 명령과 실제 동작의 일치를 확인해 주세요.
 
-Node.js 설치기를 수정할 때는 저장소 루트에서 `npm test`를 실행하세요. 추가 의존성 설치 없이 정상 설치·재실행·기존 지침 보존·동명 폴더 보호·도움말·잘못된 인수를 검증합니다.
+Node.js 설치기를 수정할 때는 저장소 루트에서 `npm test`를 실행하세요. 추가 의존성 설치 없이 지침과 고지의 동시 전달·재실행·기존 파일과 동명 폴더 보호·누락되거나 빈 배포 파일·도움말·잘못된 인수를 검증합니다.
 
 ## 출처
 
@@ -193,8 +196,8 @@ Node.js 설치기를 수정할 때는 저장소 루트에서 `npm test`를 실�
 
 `LICENSE`의 `donghwa-kang` 저작권 고지는 이 저장소에서 추가·수정한 기여분에 적용되며, 원본 자료의 권리를 대체하지 않습니다. 원본은 MIT로 표시되어 있으나 확인한 커밋에서는 별도의 LICENSE나 명시적인 저작권 고지를 찾지 못했습니다. 확인된 사실과 표준 MIT 전문을 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)에 보존했으며, 원본 저작권자·연도는 임의로 작성하지 않았습니다.
 
-`AGENTS.md` 끝의 **출처·저작권·MIT License 고지**에도 같은 내용이 포함됩니다. npm/npx·PowerShell·curl·수동 다운로드 모두 이 파일 전체를 전달하므로 파일 하나를 설치해도 고지가 함께 보존됩니다.
+`AGENTS.md`에는 작업 지침만 둡니다. 출처·저작권·MIT 전문은 별도 `THIRD_PARTY_NOTICES.md`에 보관하며, npm/npx·PowerShell·curl 설치기는 두 파일을 함께 설치합니다. 수동 다운로드 시에도 두 파일을 함께 보관하세요.
 
-- 파일을 그대로 배포하거나 기존 지침에 병합할 때는 끝부분의 고지를 함께 유지하거나 동봉하는 제3자 고지 문서에 보존하세요.
+- 파일을 그대로 배포하거나 기존 지침에 병합할 때는 `THIRD_PARTY_NOTICES.md`를 동봉하거나 대상 프로젝트의 제3자 고지 문서에 내용을 보존하세요.
 - 저장소나 패키지를 재배포할 때는 `LICENSE`와 `THIRD_PARTY_NOTICES.md`를 함께 보존하세요. 대상 프로젝트의 기존 LICENSE는 덮어쓰지 마세요.
-- 이전 버전을 이미 설치했다면 최신 `AGENTS.md`와 비교하여 고지도 반영하세요. 기존 본문을 유지하면서 새 고지 부분을 추가할 수 있으며, 설치 명령은 기존 파일을 자동으로 덮어쓰지 않습니다.
+- 이전 버전을 이미 설치했다면 기존 본문 끝의 고지와 새 `THIRD_PARTY_NOTICES.md`를 대조하세요. 고지를 별도 파일에 보존한 뒤 본문에서 중복 고지를 제거할 수 있습니다. 설치 명령은 기존 파일을 자동으로 덮어쓰지 않습니다.
