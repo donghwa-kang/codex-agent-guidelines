@@ -1,6 +1,6 @@
 {
   "name": "codex-agent-guidelines",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "Install focused, verifiable Codex guidelines without overwriting existing instructions.",
   "license": "MIT",
@@ -14,7 +14,8 @@
   "files": [
     "bin/install.cjs",
     "AGENTS.md",
-    "LICENSE"
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md"
   ],
   "engines": {
     "node": ">=18"

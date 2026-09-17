@@ -50,7 +50,7 @@ bash -o pipefail -c 'curl -fsSL https://raw.githubusercontent.com/donghwa-kang/c
 
 이 프로젝트의 출발점은 [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills)입니다. 원본은 Andrej Karpathy가 지적한 LLM 코딩의 문제를 바탕으로, 잘못된 가정·과도한 추상화·요청과 무관한 수정 등을 줄이기 위한 행동 원칙을 정리한 커뮤니티 프로젝트입니다. Claude Code용 `CLAUDE.md`와 스킬·플러그인 설치 방식, Cursor용 규칙을 제공합니다.
 
-이 저장소는 그 원칙에서 영감을 받아 **Codex의 `AGENTS.md`로 사용할 수 있도록 재구성한 지침**을 제공합니다. 원본의 네 가지 원칙과 이 지침의 대응 관계는 다음과 같습니다.
+이 저장소는 그 원칙을 참고하여 **Codex의 `AGENTS.md`로 사용할 수 있도록 한국어로 재구성·수정·확장한 지침**을 제공합니다. 원본의 MIT 표시와 확인한 커밋, 작성자 표기 및 수정분의 관계는 [출처 및 라이선스 고지](THIRD_PARTY_NOTICES.md)에 정리했습니다. 원본의 네 가지 원칙과 이 지침의 대응 관계는 다음과 같습니다.
 
 | 원본의 핵심 원칙 | 핵심 취지 | Codex용 지침에 반영한 내용 |
 | --- | --- | --- |
@@ -185,10 +185,16 @@ Node.js 설치기를 수정할 때는 저장소 루트에서 `npm test`를 실�
 - [OpenAI Codex 활용 지침](https://learn.chatgpt.com/guides/best-practices)과 [AGENTS.md 공식 안내](https://learn.chatgpt.com/docs/agent-configuration/agents-md)를 참고했습니다.
 - GitHub에서 패키지를 실행하는 방식은 npm의 [패키지 지정법](https://docs.npmjs.com/cli/v11/using-npm/package-spec/)과 [npm exec 안내](https://docs.npmjs.com/cli/v11/commands/npm-exec/)를 참고했습니다.
 
-이 저장소는 독립적으로 작성·관리하는 지침 모음입니다. 원본 프로젝트의 공식 배포판이 아니며, Andrej Karpathy 또는 OpenAI의 제작·승인을 뜻하지 않습니다.
+이 저장소는 독립적으로 관리하는 지침 모음입니다. 원본 프로젝트의 공식 배포판이 아니며, 원본 기여자·Andrej Karpathy·OpenAI의 제휴나 승인을 뜻하지 않습니다.
 
 ## 라이선스
 
 [MIT License](LICENSE)로 제공합니다. 사용·수정·재배포·상업적 이용을 허용하며, 복사본이나 상당 부분을 재배포할 때 저작권 고지와 라이선스 허락 문구를 유지해야 합니다. 보증은 제공하지 않습니다.
 
-다른 프로젝트에 지침을 포함해 재배포할 때는 이 저장소의 `LICENSE`도 보존하거나 기존 제3자 고지 문서에 해당 내용을 포함하세요. 대상 프로젝트의 기존 라이선스 파일을 덮어쓰지 마세요.
+`LICENSE`의 `donghwa-kang` 저작권 고지는 이 저장소에서 추가·수정한 기여분에 적용되며, 원본 자료의 권리를 대체하지 않습니다. 원본은 MIT로 표시되어 있으나 확인한 커밋에서는 별도의 LICENSE나 명시적인 저작권 고지를 찾지 못했습니다. 확인된 사실과 표준 MIT 전문을 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)에 보존했으며, 원본 저작권자·연도는 임의로 작성하지 않았습니다.
+
+`AGENTS.md` 끝의 **출처·저작권·MIT License 고지**에도 같은 내용이 포함됩니다. npm/npx·PowerShell·curl·수동 다운로드 모두 이 파일 전체를 전달하므로 파일 하나를 설치해도 고지가 함께 보존됩니다.
+
+- 파일을 그대로 배포하거나 기존 지침에 병합할 때는 끝부분의 고지를 함께 유지하거나 동봉하는 제3자 고지 문서에 보존하세요.
+- 저장소나 패키지를 재배포할 때는 `LICENSE`와 `THIRD_PARTY_NOTICES.md`를 함께 보존하세요. 대상 프로젝트의 기존 LICENSE는 덮어쓰지 마세요.
+- 이전 버전을 이미 설치했다면 최신 `AGENTS.md`와 비교하여 고지도 반영하세요. 기존 본문을 유지하면서 새 고지 부분을 추가할 수 있으며, 설치 명령은 기존 파일을 자동으로 덮어쓰지 않습니다.
