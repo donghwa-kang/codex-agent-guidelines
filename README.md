@@ -10,21 +10,23 @@ Codex가 요구사항을 확인하고, 필요한 부분을 수정하고, 결과�
 
 **적용할 프로젝트 폴더에서** 아래 방법 중 하나만 실행하세요. 현재 폴더에 `AGENTS.md`를 설치합니다. 기존 `AGENTS.md` 또는 `AGENTS.override.md`가 있으면 변경하지 않고 중단합니다.
 
-### npx — 운영체제 공통
+### npm / npx — 운영체제 공통
 
-Node.js 18 이상, npm에 포함된 `npx`, Git이 필요합니다.
-
-```sh
-npx --yes github:donghwa-kang/codex-agent-guidelines
-```
-
-npm을 직접 사용하려면 같은 작업을 다음 명령으로 실행할 수 있습니다.
+Node.js 18 이상, npm 7 이상, Git이 필요합니다.
 
 ```sh
 npm exec --yes -- github:donghwa-kang/codex-agent-guidelines
 ```
 
+npm에 포함된 `npx`로도 같은 작업을 실행할 수 있습니다.
+
+```sh
+npx --yes github:donghwa-kang/codex-agent-guidelines
+```
+
 GitHub 저장소의 패키지를 받아 실행하며 npm 레지스트리에는 게시하지 않았습니다. 프로젝트 의존성에 추가하지 않고 패키지에 포함된 지침 파일을 설치합니다. 실행 코드는 [Node.js 설치기](bin/install.cjs)에서 확인할 수 있습니다.
+
+오래된 독립형 `npx`가 먼저 실행되어 `You must supply a command` 오류가 나면 위의 `npm exec` 명령을 사용하세요.
 
 ### Node.js 없이 설치하기
 
@@ -165,6 +167,7 @@ bash -o pipefail -c 'curl -fsSL https://raw.githubusercontent.com/donghwa-kang/c
 - 모델, 작업 맥락, 도구, 지침 충돌에 따라 결과가 달라질 수 있습니다. 효과를 확인하려면 자신의 대표 작업으로 비교해야 합니다.
 - 지침 본문은 정적 검토와 가상 실패 시나리오 검토를 거쳤습니다. 실제 모델을 반복 실행한 비교 평가나 공격 성공률 측정은 수행하지 않았습니다.
 - 2026-09-17 기준 Windows의 PowerShell 7.6.5, Windows PowerShell 5.1, Git Bash 5.2.26에서 설치 스크립트를 검증했습니다. 공백·한글이 포함된 경로에서 설치 결과를 원본의 SHA-256과 대조했고, 재실행·기존 `AGENTS.md`·`AGENTS.override.md`·동명 폴더 보존과 다운로드 오류·빈 응답 처리 및 임시 파일 정리를 확인했습니다.
+- npm/npx 방식은 Windows의 Node.js 24.20.0·npm 11.19.0 및 npm 동봉 npx로 새 캐시에서 실제 GitHub 설치와 재실행 시 파일 보존을 확인했습니다. Node.js 설치기의 자동 테스트 6개도 통과했습니다. 다른 Node.js/npm 버전 조합은 직접 실행하지 않았습니다.
 - macOS·Linux 네이티브 환경에서는 명령을 직접 실행하지 않았습니다. 셸 명령에 필요한 도구와 하드 링크를 지원하지 않는 파일 시스템에서는 수동 다운로드 방법을 사용하세요.
 - 현재 검증 환경의 CLI 실행 제약으로 Codex 세션 내 지침 로딩은 직접 확인하지 못했습니다. 설치 후 위의 적용 확인 절차를 수행해 주세요.
 
